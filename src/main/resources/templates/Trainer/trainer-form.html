@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Save Trainer</title>
+
+    <style>
+        /* Background Styling */
+        body {
+            background-image: url('/images/addtrainer-back.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Overlay for readability */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 12px;
+            width: 50%;
+            text-align: center;
+            box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        h3 {
+            color: gold;
+            font-size: 32px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 10px gold;
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: black;
+            border-radius: 8px;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.2);
+            transition: 0.3s ease-in-out;
+        }
+
+        .form-control:focus {
+            box-shadow: 0px 0px 12px rgba(255, 215, 0, 0.8);
+            outline: none;
+        }
+
+        .btn-info {
+            background: gold;
+            border: none;
+            color: black;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 12px;
+            width: 50%;
+            border-radius: 8px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn-info:hover {
+            background: darkgoldenrod;
+            transform: scale(1.05);
+        }
+
+        a {
+            color: gold;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: darkgoldenrod;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Dark Overlay -->
+    <div class="overlay"></div>
+
+    <div class="container">
+        <h3>Add New Trainer</h3>
+        <hr>
+
+        <p class="h4 mb-4">Save Trainer</p>
+
+        <form action="#" th:action="@{/trainers/tsave}"
+              th:object="${trainer}" method="POST">
+
+            <!-- Add hidden form field to handle update -->
+            <input type="hidden" th:field="*{id}" />
+
+            <input type="text" th:field="*{firstName}"
+                   class="form-control mb-3 w-75 mx-auto" placeholder="First Name">
+
+            <input type="text" th:field="*{lastName}"
+                   class="form-control mb-3 w-75 mx-auto" placeholder="Last Name">
+
+            <input type="text" th:field="*{email}"
+                   class="form-control mb-3 w-75 mx-auto" placeholder="Email">
+
+            <input type="text" th:field="*{specialization}"
+                   class="form-control mb-3 w-75 mx-auto" placeholder="Specialization">
+
+            <input type="text" th:field="*{experienceYears}"
+                   class="form-control mb-3 w-75 mx-auto" placeholder="Experience Years">
+
+            <input type="text" th:field="*{phoneNumber}"
+                   class="form-control mb-3 w-75 mx-auto" placeholder="Phone Number">
+
+            <button type="submit" class="btn btn-info">Save</button>
+        </form>
+
+        <hr>
+        <a th:href="@{/trainers/tlist}">Back to Trainer's List</a>
+    </div>
+</body>
+</html>
