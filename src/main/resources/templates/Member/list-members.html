@@ -147,22 +147,27 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/members/about}">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/members/contact}">Contact Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/members/career}">Careers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/members/help}">Help</a>
-                </li>
-            </ul>
-        </div>
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+		           <ul class="navbar-nav">
+		               <li class="nav-item">
+		                   <a class="nav-link" th:href="@{/members/about}">About Us</a>
+		               </li>
+		               <li class="nav-item">
+		                   <a class="nav-link" th:href="@{/members/contact}">Contact Us</a>
+		               </li>
+		               <li class="nav-item">
+		                   <a class="nav-link" th:href="@{/members/career}">Careers</a>
+		               </li>
+		               <li class="nav-item">
+		                   <a class="nav-link" th:href="@{/members/help}">Help</a>
+		               </li>
+		           </ul>
+		           
+		           <!-- Logout Button -->
+		           <form th:action="@{/logout}" method="POST" class="d-flex logout-btn">
+		               <button type="submit" class="btn btn-danger">Logout</button>
+		           </form>
+		       </div>
     </div>
 </nav>
 
@@ -175,21 +180,38 @@
         <h3 class="header">Golden Gym</h3>
     </div>
 
+
+	<!-- display user name and role -->
+
+	<p>
+	    User: <span sec:authentication="principal.username"></span>
+	    <br><br>
+	    Role(s): <span sec:authentication="principal.authorities"></span>
+	</p>
+	
     <hr>
 
     <!-- Action Buttons -->
     <div class="d-flex gap-3 mb-4">
+		<div sec:authorize="hasRole('ADMIN')">
         <a th:href="@{/members/showFormForAdd}" class="btn btn-custom btn-add">
             Add Member
         </a>
+		</div>
 
+		
+		<div sec:authorize="hasAnyRole('ADMIN','TRAINER')">
         <a th:href="@{/trainers/tlist}" class="btn btn-custom btn-trainer">
             Trainer's Section
         </a>
-
+		</div>
+		
+		
+		<div sec:authorize="hasRole('ADMIN')">
         <a th:href="@{/workoutplans/wlist}" class="btn btn-custom btn-workout">
             Workout Plan
         </a>
+		</div>
     </div>
 
     <!-- Member Table -->
@@ -198,7 +220,7 @@
             <thead class="table-dark">
                 <tr>
                     <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Last Name</th> 
                     <th>Email</th>
                     <th>Action</th>
                 </tr>
@@ -212,16 +234,20 @@
 
                     <!-- Update & Delete Buttons -->
                     <td>
+						<div sec:authorize="hasRole('ADMIN')">
                         <a th:href="@{/members/showFormForUpdate(memberId=${tempMember.id})}"
                            class="btn btn-info btn-sm btn-action">
                             Update
                         </a>
+						</div>
 
+						<div sec:authorize="hasRole('ADMIN')">
                         <a th:href="@{/members/delete(memberId=${tempMember.id})}"
                            class="btn btn-danger btn-sm btn-action"
                            onclick="return confirm('Are you sure you want to delete this member?');">
                             Delete
                         </a>
+						</div>
                     </td>
                 </tr>
             </tbody>
@@ -229,6 +255,9 @@
     </div>
 
 </div>
+
+
+
 
 </body>
 </html>
