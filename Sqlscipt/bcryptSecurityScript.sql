@@ -48,9 +48,9 @@ CREATE TABLE `authorities` (
 
 INSERT INTO `authorities` 
 VALUES 
-('navin','ROLE_EMPLOYEE'),
-('pooja','ROLE_EMPLOYEE'),
-('pooja','ROLE_MANAGER'),
-('ajay','ROLE_EMPLOYEE'),
-('ajay','ROLE_MANAGER'),
+('navin','ROLE_MEMBER'),
+('pooja','ROLE_MEMBER'),
+('pooja','ROLE_TRAINER'),
+('ajay','ROLE_MEMBER'),
+('ajay','ROLE_TRAINER'),
 ('ajay','ROLE_ADMIN');
